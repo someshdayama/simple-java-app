@@ -83,7 +83,7 @@ pipeline {
             	} else {
 			    env.buildmachine_tag = "testing"
 			    }
-            		docker.withRegistry('https://hub.docker.com', 'DTR'){
+            		docker.withRegistry('https://hub.docker.com/repository/docker/magalam87/docker-private', 'DTR'){
               	docker.image("magalam87/docker-private:docker-slave").inside("-v ${env.CACHE}:${env.WORKSPACE}/cache") {			
 			          withCredentials([usernamePassword(credentialsId: 'jenkins-agent', passwordVariable: 'credsfilevar', usernameVariable: 'username')]) {
             		//dir("common-framework"){
