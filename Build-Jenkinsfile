@@ -11,7 +11,7 @@ pipeline {
 		//BUILD_DIR="/opt/play-app"
 		RELEASE_VERSION="${params.RELEASE_VERSION}"
 		RELEASE_DATE=new java.text.SimpleDateFormat('yyyyMMdd').format(new Date())
-		CACHE="${env.CACHE_DIR}/jubliant"
+		CACHE="jubliant"
 		ATR_ORG="" //need info artifactory
 		APP_VERSION="${APP}.version.${BUILD_NUMBER}"
 		sources="src/main"
