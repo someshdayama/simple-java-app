@@ -113,7 +113,24 @@ pipeline {
 				}				
 				}					
 			}						
-			}		   
+			}
+
+		stage("Build Container") {
+      			steps {
+                      sh "pwd"
+                      sh "ls -l"
+                      dir("app"){
+                        ansiColor('xterm') {
+          				script {
+            					docker.withRegistry('', 'DTR'){
+              					docker.build("magalam87/docker-private/${params.APP}:app-java", "--build-arg RELEASE_DATE=${RELEASE_DATE} --build-arg GIT_BRANCH=${GIT_BRANCH}  --build-arg BUILD_VERSION=${params.DOCKER_TAG} --no-cache --pull -f ${env.WORKSPACE}/app/Dockerfile .").push()
+        				    }
+          				}
+        			}
+                      }
+
+      				}
+			    }		   
 
     
    }
