@@ -74,7 +74,7 @@ pipeline {
 			ansiColor('xterm') {
 			sh "mkdir -p ${env.CACHE}/mvn"
 			script {
-			def server = Artifactory.server('Artifactory')
+			//def server = Artifactory.server('Artifactory')
 		
 			if("${params.JAVA_OPTION}" == "openjdk8") {
          		env.buildmachine_tag = "v2"
