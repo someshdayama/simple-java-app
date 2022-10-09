@@ -123,7 +123,7 @@ pipeline {
                         ansiColor('xterm') {
           				script {
             					docker.withRegistry('', 'DTR'){
-              					docker.build("${params.APP}:app-java", "--build-arg RELEASE_DATE=${RELEASE_DATE} --build-arg GIT_BRANCH=${GIT_BRANCH}  --build-arg BUILD_VERSION=${params.DOCKER_TAG} --no-cache --pull -f ${env.WORKSPACE}/app/Dockerfile .").push()
+              					docker.build("magalam87/java-app:${env.BUILD_NUMBER}", "--build-arg RELEASE_DATE=${RELEASE_DATE} --build-arg GIT_BRANCH=${GIT_BRANCH}  --build-arg BUILD_VERSION=${params.DOCKER_TAG} --no-cache --pull -f ${env.WORKSPACE}/app/Dockerfile .").push()
         				    }
           				}
         			}
