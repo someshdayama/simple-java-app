@@ -98,9 +98,11 @@ pipeline {
                    
                     dir("app"){
 
-                    sh "mvn clean install"	
+                            sh "mvn clean install"
+			    sh "mkdir -p ${env.WORKSPACE}/m2"
+			    sh "pwd"
 		            sh "mvn -Dmaven.repo.local=${env.WORKSPACE}/cache/m2 clean install"
-					sh "ls -l "
+					sh "ls -l"
                  		           }
 
 
