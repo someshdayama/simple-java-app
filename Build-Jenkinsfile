@@ -98,10 +98,10 @@ pipeline {
                    
                     dir("app"){
 
-                            sh "mvn clean install"
-			    sh "mkdir -p ${env.WORKSPACE}/m2"
+                            //sh "mvn clean install"
+			    //sh "mkdir -p ${env.WORKSPACE}/m2"
 			    sh "pwd"
-		            sh "mvn -Dmaven.repo.local=${env.WORKSPACE}/m2 clean install"
+		            //sh "mvn -Dmaven.repo.local=${env.WORKSPACE}/m2 clean install"
 					sh "ls -l"
                  		           }
 
@@ -122,8 +122,9 @@ pipeline {
                       dir("app"){
                         ansiColor('xterm') {
           				script {
-            					docker.withRegistry('', 'DTR'){
-              					docker.build("magalam87/java-app:${env.BUILD_NUMBER}", "--build-arg RELEASE_DATE=${RELEASE_DATE} --build-arg GIT_BRANCH=${GIT_BRANCH}  --build-arg BUILD_VERSION=${params.DOCKER_TAG} --no-cache --pull -f ${env.WORKSPACE}/app/Dockerfile .").push()
+					        sh 'ls'
+            					//docker.withRegistry('', 'DTR'){
+              					//docker.build("magalam87/java-app:${env.BUILD_NUMBER}", "--build-arg RELEASE_DATE=${RELEASE_DATE} --build-arg GIT_BRANCH=${GIT_BRANCH}  --build-arg BUILD_VERSION=${params.DOCKER_TAG} --no-cache --pull -f ${env.WORKSPACE}/app/Dockerfile .").push()
         				    }
           				}
         			}
@@ -140,7 +141,7 @@ pipeline {
                         ansiColor('xterm') {
           				script {
             					docker.withRegistry('', 'DTR'){
-              					docker.image("owasp/zap2docker-stable").inside("-v ${env.CACHE}:${env.WORKSPACE}/cache") {
+              					docker.image("owasp/zap2docker-stable").inside("-v ${env.CACHE}:${env.WORKSPACE}/cache").withRun {
 						                 sh 'ls -lrt'
                                                                  sh './zap/zap.sh -daemon - port 80'
 								
