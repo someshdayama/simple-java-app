@@ -133,7 +133,7 @@ pipeline {
                         ansiColor('xterm') {
           				script {
             					docker.withRegistry('', 'DTR'){
-              					docker.image("owasp/zap2docker-stable").withRun('-p 80:8090') {
+              					docker.image("owasp/zap2docker-stable").withRun('-p 80:8090 -v ${WORKSPACE}:/zap/wrk') {
 									    
 						                 sh 'ls -lrt'
                                          sh './zap/zap.sh -daemon - port 80'
