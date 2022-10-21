@@ -132,8 +132,8 @@ pipeline {
 		      sh "mkdir -p ${env.WORKSPACE}/zap/wrk"
                         ansiColor('xterm') {
           				script {
-            					docker.withRegistry('', 'DTR'){
-              					docker.image("owasp/zap2docker-stable").inside {
+            					//docker.withRegistry('', 'DTR'){
+              					//docker.image("owasp/zap2docker-stable").inside {
 									 sh 'docker run -p 80:8080 -v /var/lib/jenkins/workspace/java-app:/zap/wrk owasp/zap2docker-stable sh -c "./zap.sh -daemon"'
 									    
 						                // sh 'ls -lrt'
@@ -145,8 +145,8 @@ pipeline {
 								
 
 
-								}
-        				    }
+							//	}
+        				   // }
           				}
         			}
                       
