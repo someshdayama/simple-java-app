@@ -135,6 +135,7 @@ pipeline {
             					//docker.withRegistry('', 'DTR'){
               					//docker.image("owasp/zap2docker-stable").inside {
 									 sh '''
+									   docker stop container owasp
 									   docker run --name owasp -d -p 80:8080 -v /var/lib/jenkins/workspace/java-app:/zap/wrk owasp/zap2docker-stable sh -c "./zap.sh -daemon"
 									   docker exec owasp bash -c 'zap-api-scan.py -t http://172.12.7.117:9000/receivecart/swagger-ui/#/cart-receiver-controller/receiveCartUsingPOST -f openapi -r file.html'
 									   '''
