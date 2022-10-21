@@ -142,7 +142,7 @@ pipeline {
             					docker.withRegistry('', 'DTR'){
               					docker.image("owasp/zap2docker-stable").inside("-v ${env.CACHE}:${env.WORKSPACE}/cache") {
 						                 sh 'ls -lrt'
-                                                                 sh './zap.sh -daemon - port 80'
+                                                                 sh './zap/zap.sh -daemon - port 80'
 								
 								   //sh 'mkdir -p /zap/wrk'
                                                                   sh 'zap-api-scan.py -t http://172.12.7.117:9000/receivecart/swagger-ui/#/cart-receiver-controller/receiveCartUsingPOST -f openapi -r file.html'
