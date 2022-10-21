@@ -134,13 +134,16 @@ pipeline {
           				script {
             					//docker.withRegistry('', 'DTR'){
               					//docker.image("owasp/zap2docker-stable").inside {
-									 sh 'docker run -p 80:8080 -v /var/lib/jenkins/workspace/java-app:/zap/wrk owasp/zap2docker-stable sh -c "./zap.sh -daemon"'
+									 sh '''
+									   docker run --name owasp -p 80:8080 -v /var/lib/jenkins/workspace/java-app:/zap/wrk owasp/zap2docker-stable sh -c "./zap.sh -daemon"
+									   docker exec owasp bash -c 'zap-api-scan.py -t http://172.12.7.117:9000/receivecart/swagger-ui/#/cart-receiver-controller/receiveCartUsingPOST -f openapi -r file.html'
+									   '''
 									    
 						                // sh 'ls -lrt'
                                          //sh './zap/zap.sh -daemon - port 80'
 								
 								   //sh 'mkdir -p /zap/wrk'
-                                           sh 'zap-api-scan.py -t http://172.12.7.117:9000/receivecart/swagger-ui/#/cart-receiver-controller/receiveCartUsingPOST -f openapi -r file.html'
+                                          // sh 'zap-api-scan.py -t http://172.12.7.117:9000/receivecart/swagger-ui/#/cart-receiver-controller/receiveCartUsingPOST -f openapi -r file.html'
 
 								
 
