@@ -133,7 +133,8 @@ pipeline {
                         ansiColor('xterm') {
           				script {
             					docker.withRegistry('', 'DTR'){
-              					docker.image("owasp/zap2docker-stable").withRun('-v ${WORKSPACE}:/zap/wrk --entrypoint ./zap.sh -daemon') {
+              					docker.image("owasp/zap2docker-stable").inside {
+									 sh 'docker run -p 80:8080 -v /var/lib/jenkins/workspace/java-app:/zap/wrk owasp/zap2docker-stable sh -c "./zap.sh -daemon"'
 									    
 						                // sh 'ls -lrt'
                                          //sh './zap/zap.sh -daemon - port 80'
