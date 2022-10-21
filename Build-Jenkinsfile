@@ -87,14 +87,6 @@ pipeline {
             		docker.withRegistry('', 'DTR'){
               	docker.image("magalam87/docker-private:docker-slave").inside("-v ${env.CACHE}:${env.WORKSPACE}/cache") {			
 			          withCredentials([usernamePassword(credentialsId: 'jenkins-agent', passwordVariable: 'credsfilevar', usernameVariable: 'username')]) {
-            		//dir("common-framework"){
-			        //sh "ls -l"					
-                    //sh "mvn clean install"
-                    //sh "mkdir -p ${env.WORKSPACE}/m2"
-                    //sh "pwd"
-                    //sh "mvn -Dmaven.repo.local=${env.WORKSPACE}/cache/m2 clean install" 
-
-								    //       }
                    
                     dir("app"){
 
@@ -125,7 +117,7 @@ pipeline {
 					        sh 'ls'
             					//docker.withRegistry('', 'DTR'){
               					//docker.build("magalam87/java-app:${env.BUILD_NUMBER}", "--build-arg RELEASE_DATE=${RELEASE_DATE} --build-arg GIT_BRANCH=${GIT_BRANCH}  --build-arg BUILD_VERSION=${params.DOCKER_TAG} --no-cache --pull -f ${env.WORKSPACE}/app/Dockerfile .").push()
-        				    }
+        				    //}
           				}
         			}
                       }
@@ -163,4 +155,4 @@ pipeline {
     
    }
 
-//}
+}
