@@ -134,15 +134,14 @@ pipeline {
 
 	    stage("start container") {
       			steps {
-                      //sh "docker run -d -p 9000:8090 ghcr.io/v-mraghu/order-management-service:${env.BUILD_NUMBER}"
-		      sh 'sleep 20'
+                      //sh "docker run -d -p 9000:8090 ghcr.io/v-mraghu/order-management-service:${env.BUILD_NUMBER}"		      
                       sh "ls -l"
 		      sh "mkdir -p ${env.WORKSPACE}/zap/wrk"
                         ansiColor('xterm') {
           				script {
             					docker.withRegistry('', 'DTR'){
-              					docker.image("owasp/zap2docker-stable").run("sh -c ./zap.sh -daemon -port 80") {
-                                
+              					docker.image("owasp/zap2docker-stable").inside("-v ${env.CACHE}:${env.WORKSPACE}/cache") {
+                                                                 sh './zap.sh -daemon - port 80'
 								dir("app"){
 								   //sh 'mkdir -p /zap/wrk'
                                    sh 'zap-api-scan.py -t http://172.12.7.117:9000/receivecart/swagger-ui/#/cart-receiver-controller/receiveCartUsingPOST -f openapi -r file.html'
