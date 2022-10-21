@@ -141,7 +141,7 @@ pipeline {
                         ansiColor('xterm') {
           				script {
             					docker.withRegistry('', 'DTR'){
-              					docker.image("owasp/zap2docker-stable").inside("-v ${env.WORKSPACE}:/zap/wrk").run("sh -c ./zap.sh -daemon -port 80") {
+              					docker.image("owasp/zap2docker-stable").run("sh -c ./zap.sh -daemon -port 80") {
                                 
 								dir("app"){
 								   //sh 'mkdir -p /zap/wrk'
