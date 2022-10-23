@@ -137,7 +137,7 @@ pipeline {
             					//docker.withRegistry('', 'DTR'){
               					//docker.image("owasp/zap2docker-stable").inside {
 									 sh '''
-									   docker container prune -f
+									   //docker container prune -f
 									   docker run owasp -d -p 80:80 -v ${env.WORSKSPACE}/out:/zap/wrk/:rw owasp/zap2docker-stable zap.sh -daemon
 									   //docker run --name owasp -d -p 80:8080 -v /var/lib/jenkins/workspace/java-app:/zap/wrk owasp/zap2docker-stable sh -c "./zap.sh -daemon"
 									   docker exec owasp sh -c zap-api-scan.py -t https://kafka.apache.org/ -f openapi -d -r file.html
