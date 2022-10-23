@@ -131,7 +131,7 @@ pipeline {
                       sh "ls -l"
 		      sh "mkdir -p ${env.WORKSPACE}/zap/wrk"
 		      sh "mkdir -p ${env.WORKSPACE}/out"
-		      sh "chmod -R 777 out"
+		      sh "chmod -R 777 ${env.WORKSPACE}/out"
                         ansiColor('xterm') {
           				script {
 									 sh '''									
