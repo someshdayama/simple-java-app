@@ -136,7 +136,7 @@ pipeline {
           				script {
 									 sh '''									
 									   docker run -d -p 80:80 --name owasp -v /var/lib/jenkins/workspace/java-app/out:/zap/wrk/:rw owasp/zap2docker-stable zap.sh -daemon
-									   docker exec owasp sh -c zap-api-scan.py -t https://kafka.apache.org/ -f openapi -d -r file.html
+									   docker exec owasp sh -c zap-api-scan.py -t https://kafka.apache.org/downloads -f openapi -d -r file.html
 									   '''
 									    
 						                // sh 'ls -lrt'
