@@ -158,8 +158,8 @@ pipeline {
       				}
 			    }
 
-			stage(publish report){
-				steps{
+		stage("publish report") {
+				steps {
 					ansiColor('xterm'){
 						script{
 							publishHTML([allowMissing: false, 
