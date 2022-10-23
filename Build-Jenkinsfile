@@ -134,13 +134,8 @@ pipeline {
 		      sh "chmod -R 777 out"
                         ansiColor('xterm') {
           				script {
-            					//docker.withRegistry('', 'DTR'){
-              					//docker.image("owasp/zap2docker-stable").inside {
-									 sh '''
-									
+									 sh '''									
 									   docker run owasp -d -p 80:80 -v ${env.WORSKSPACE}/out:/zap/wrk/:rw owasp/zap2docker-stable zap.sh -daemon
-									   
-									   docker exec owasp sh -c zap-api-scan.py -t https://kafka.apache.org/ -f openapi -d -r file.html
 									   '''
 									    
 						                // sh 'ls -lrt'
@@ -152,8 +147,7 @@ pipeline {
 								
 
 
-							//	}
-        				   // }
+							
           				}
         			}
                       
