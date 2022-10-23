@@ -129,14 +129,14 @@ pipeline {
       			steps {
                       //sh "docker run -d -p 9000:8090 ghcr.io/v-mraghu/order-management-service:${env.BUILD_NUMBER}"		      
                       sh "ls -l"
-		      sh "mkdir -p ${env.WORKSPACE}/zap/wrk"
-		      sh "mkdir -p ${env.WORKSPACE}/out"
-		      sh "chmod -R 777 ${env.WORKSPACE}/out"
+		              sh "mkdir -p ${env.WORKSPACE}/out"
+		              sh "chmod -R 777 ${env.WORKSPACE}/out"
                         ansiColor('xterm') {
           				script {
 									 sh '''
 									   #docker container prune -f									
-									   #docker run -d -p 80:80 --name owasp -v /var/lib/jenkins/workspace/java-app/out:/zap/wrk/:rw owasp/zap2docker-stable zap.sh -daemon
+									   docker run -d -p 80:80 --name owasp -v /var/lib/jenkins/workspace/java-app/out:/zap/wrk/:rw owasp/zap2docker-stable zap.sh -daemon
+                                       sleep 20
 									   docker exec owasp sh -c "zap-api-scan.py -t https://kafka.apache.org/downloads -f openapi -d -r file.html"
 									   docker rm container owasp
 									   '''
