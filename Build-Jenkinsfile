@@ -162,7 +162,14 @@ pipeline {
 				steps{
 					ansiColor('xterm'){
 						script{
-							publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: false, reportDir: 'out', reportFiles: 'file.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+							publishHTML([allowMissing: false, 
+							alwaysLinkToLastBuild: true,
+							keepAll: false, 
+							reportDir: 'out', 
+							reportFiles: 'file.html', 
+							reportName: 'HTML Report', 
+							reportTitles: '', 
+							useWrapperFileDirectly: true])
 						}
 					}
 				}
