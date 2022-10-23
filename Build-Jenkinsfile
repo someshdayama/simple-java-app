@@ -135,7 +135,7 @@ pipeline {
                         ansiColor('xterm') {
           				script {
 									 sh '''									
-									   docker run owasp -d -p 80:80 -v /var/lib/jenkins/workspace/java-app/out:/zap/wrk/:rw owasp/zap2docker-stable zap.sh -daemon
+									   docker run -d -p 80:80 --name owasp -v /var/lib/jenkins/workspace/java-app/out:/zap/wrk/:rw owasp/zap2docker-stable zap.sh -daemon
 									   docker exec owasp sh -c zap-api-scan.py -t https://kafka.apache.org/ -f openapi -d -r file.html
 									   '''
 									    
