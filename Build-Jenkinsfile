@@ -164,6 +164,7 @@ pipeline {
 						script{
 							publishHTML([allowMissing: false, 
 							alwaysLinkToLastBuild: true,
+							ncludes: '**/*.html',
 							keepAll: false, 
 							reportDir: 'out', 
 							reportFiles: 'file.html', 
