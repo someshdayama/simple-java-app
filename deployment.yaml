@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-hello-world-webapp
+  labels:
+    app: java-hello-world-webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: java-hello-world-webapp
+  template:
+    metadata:
+      labels:
+        app: java-hello-world-webapp
+    spec:
+      containers:
+      - name: java-hello-world-webapp
+        image: someshdayama/java-hello-world-webapp:v1
+        ports:
+        - containerPort: 80
